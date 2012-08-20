@@ -1,5 +1,6 @@
 import glob
 import os
+import operator
 from BeautifulSoup import BeautifulSoup
 
 
@@ -37,6 +38,10 @@ def readFile(fileName):
   	#return {'Page Name':pageName, 'pageURL':pageURL ,'pageDate':pageDate }
 
 
+def sortByColumn(A,*args):
+    A.sort(key=operator.itemgetter(*args))
+    return A
+
 
 listOfFiles = findFiles(outputPath)
 
@@ -52,6 +57,10 @@ print listOfLinks
 
 
 
+
+
+
+print sortByColumn(listOfLinks,0)
 
 
 
