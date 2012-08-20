@@ -32,7 +32,9 @@ def readFile(fileName):
 	pageURL = titleSection.a.get('href')
 	pageDate = dateSection.get('title')
 
-	return pageName, pageURL, pageDate
+	return [[pageName],[pageURL],[pageDate]]
+
+  	#return {'Page Name':pageName, 'pageURL':pageURL ,'pageDate':pageDate }
 
 
 
@@ -44,7 +46,9 @@ listOfLinks = []
 for fileName in listOfFiles:
 	listOfLinks.append(readFile(fileName))
 
-print str(listOfLinks)
+
+print listOfLinks
+#print (listOfLinks[0][0])
 
 
 
