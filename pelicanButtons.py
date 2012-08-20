@@ -1,8 +1,10 @@
 import glob
 import os
+from BeautifulSoup import BeautifulSoup
 
 
 outputPath = "/Users/tom/Dropbox/Sites/newtomrandle.com/output/posts"
+locationOfLink = 'h2'
 
 
 def findFiles(pathName):
@@ -18,15 +20,24 @@ def findFiles(pathName):
 
 def readFile(fileName):
 
-	fileTxt = open(fileName)
+	page = open(fileName)
 
-	print fileTxt.read()
+	soup = BeautifulSoup(page.read())
+
+	titleSection = soup.find(locationOfLink)
+
+	pageName = titleSection.a.text
+	pageURL = titleSection.a.get('href')
+
+	print pageName
+	print pageURL
 
 
 
 listOfFiles = findFiles(outputPath)
 
 readFile(listOfFiles[0])
+
 
 
 
