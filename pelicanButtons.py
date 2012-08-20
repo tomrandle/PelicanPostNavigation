@@ -5,6 +5,7 @@ from BeautifulSoup import BeautifulSoup
 
 outputPath = "/Users/tom/Dropbox/Sites/newtomrandle.com/output/posts"
 locationOfLink = 'h2'
+locationOfDate = 'published' #fix this!
 
 
 def findFiles(pathName):
@@ -25,18 +26,26 @@ def readFile(fileName):
 	soup = BeautifulSoup(page.read())
 
 	titleSection = soup.find(locationOfLink)
+	dateSection = soup.find('abbr', { "class" : locationOfDate })
 
 	pageName = titleSection.a.text
 	pageURL = titleSection.a.get('href')
+	pageDate = dateSection.get('title')
 
-	print pageName
-	print pageURL
+	return pageName, pageURL, pageDate
 
 
 
 listOfFiles = findFiles(outputPath)
 
-readFile(listOfFiles[0])
+
+listOfLinks = []
+
+for fileName in listOfFiles:
+	listOfLinks.append(readFile(fileName))
+
+print str(listOfLinks)
+
 
 
 
