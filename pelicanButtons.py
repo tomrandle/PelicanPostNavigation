@@ -1,20 +1,36 @@
 import glob
 import os
 
-os.chdir("/Users/tom/Dropbox/Sites/newtomrandle.com/output/posts")
 
-fileList = []
-
-for fileName in glob.glob("*.html"):
-    fileList.append(fileName)
-
-print fileList
+outputPath = "/Users/tom/Dropbox/Sites/newtomrandle.com/output/posts"
 
 
-for fileName in fileList:
+def findFiles(pathName):
+
+	os.chdir(pathName)
+	_fileList = []
+
+	for fileName in glob.glob("*.html"):
+	    _fileList.append(fileName)
+
+	return _fileList
+
+
+def readFile(fileName):
+
 	fileTxt = open(fileName)
 
 	print fileTxt.read()
+
+
+
+listOfFiles = findFiles(outputPath)
+
+readFile(listOfFiles[0])
+
+
+
+
 
 
 """
