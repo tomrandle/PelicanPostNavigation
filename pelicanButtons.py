@@ -2,6 +2,8 @@ import glob
 import os
 import operator
 from BeautifulSoup import BeautifulSoup
+from xml.etree import ElementTree
+
 
 
 outputPath = "/Users/tom/Dropbox/Sites/newtomrandle.com/output/posts"
@@ -35,12 +37,24 @@ def readFile(fileName):
 
 	return [[pageName],[pageURL],[pageDate]]
 
-  	#return {'Page Name':pageName, 'pageURL':pageURL ,'pageDate':pageDate }
-
+	fileName.close()
 
 def sortByColumn(A,*args):
     A.sort(key=operator.itemgetter(*args))
     return A
+
+
+"""
+def createLink(outputFile, inputLinks):
+	outPut = open(to_file, 'w')
+
+	root_element = ET.Element("body")
+
+	ul = ET.SubElement(root_element, "BAH")
+
+	print "creating element"
+
+"""
 
 
 listOfFiles = findFiles(outputPath)
@@ -52,31 +66,10 @@ for fileName in listOfFiles:
 	listOfLinks.append(readFile(fileName))
 
 
-print listOfLinks
-#print (listOfLinks[0][0])
+for b in listOfLinks: 
+	print b[0]
+	print b[1]
 
-
-
-
-
-
-print sortByColumn(listOfLinks,0)
-
-
-
-
-
-"""
-  <header>
-    <h2 class="entry-title">
-      <a href="../posts/my-new-post--.html" rel="bookmark"
-         title="Permalink to Mr Fox is an arse.">Mr Fox is an arse.</a></h2>
-  </header>
-  <footer class="post-info">
-    <abbr class="published" title="2012-08-20T18:23:03">
-      Mon 20 August 2012
-    </abbr>
-"""
 
 
 
