@@ -60,53 +60,29 @@ for b in listOfLinks:
 	print b[1]
 
 
-outputTestPath = "/Users/tom/Dropbox/python/pelicanAddNextAndPreviousButtons"
-
-os.chdir(outputTestPath)
-
-target = open("outputText.html", 'w')
 
 
-root_element = ElementTree.Element("nav")
+def saveLinks():
 
-nextLink = ElementTree.SubElement(root_element, "a", Class="bah",href="www.google.com")
-previousLink = ElementTree.SubElement(root_element, "a", Class="sas", href="www.google.com", title="BAAAAAH")
+	outputTestPath = "/Users/tom/Dropbox/python/pelicanAddNextAndPreviousButtons/outputText.html"
 
-nextLink.text = "Mystical content"
-previousLink.text = "More"
+	target = open(outputTestPath, 'w')
 
 
-target.write(ElementTree.tostring(root_element))
+	root_element = ElementTree.Element("nav")
+
+	nextLink = ElementTree.SubElement(root_element, "a", Class="bah",href="www.google.com")
+	previousLink = ElementTree.SubElement(root_element, "a", Class="sas", href="www.google.com", title="BAAAAAH")
+
+	nextLink.text = "Mystical content"
+	previousLink.text = "More"
 
 
+	target.write(ElementTree.tostring(root_element))
+
+	target.close()
 
 
+saveLinks()
 
 
-
-"""
-def createLink(outputFile, inputLinks):
-	outPut = open(to_file, 'w')
-
-	root_element = ET.Element("body")
-
-	ul = ET.SubElement(root_element, "BAH")
-
-	print "creating element"
-
-"""
-
-
-"""
-txt = open(filename)
-
-print "Here's your file %r:" % filename
-print txt.read()
-
-print "Type the filename again:"
-file_again = raw_input("> ")
-
-txt_again = open(file_again)
-
-print txt_again.read()
-"""
