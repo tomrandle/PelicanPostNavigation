@@ -35,7 +35,7 @@ def readFile(fileName):
 	pageURL = titleSection.a.get('href')
 	pageDate = dateSection.get('title')
 
-	return [[pageName],[pageURL],[pageDate]]
+	return [pageName, pageURL , pageDate , fileName]
 
 	fileName.close()
 
@@ -47,29 +47,31 @@ def sortByColumn(A,*args):
 
 listOfFiles = findFiles(outputPath)
 
-
 listOfLinks = []
+
 
 for fileName in listOfFiles:
 	listOfLinks.append(readFile(fileName))
 
 
-for b in listOfLinks: 
-	print b[0]
-
-
 sortByColumn(listOfLinks,2)
 
-for b in listOfLinks: 
-	print b[0]
 
 
-for post in listOfFiles:
+for post in listOfLinks:
+	#text = str(post[3]).strip('[]').strip("''") # Must be doing something wrong to need this!?
+	text = post[3]
+	page = open(text)
 
-	openFile = readFile(post)
 
-	nextLink = []
+	if post > 0 :
+		index = post - 1 #post is a list!!
+		nextLink = listOfLinks[index][3]
+		print nextLink
 	previousLink = []
+
+	#Lookup 
+
 
 	#print "OPen file", openFile
 
@@ -85,7 +87,8 @@ def saveLinks():
 
 	root_element = ElementTree.Element("nav")
 
-	nextLink = ElementTree.SubElement(root_element, "a", Class="bah",href="www.google.com")
+
+	nextLink = ElementTree.SubElement(root_element, "a", {'class': 'bah', 'href': 'www.bah.com'})
 	previousLink = ElementTree.SubElement(root_element, "a", Class="sas", href="www.google.com", title="BAAAAAH")
 
 	nextLink.text = "Mystical content"
@@ -95,7 +98,4 @@ def saveLinks():
 	target.write(ElementTree.tostring(root_element))
 
 	target.close()
-
-
-
 
