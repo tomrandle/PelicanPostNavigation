@@ -45,7 +45,6 @@ def sortByColumn(A,*args):
 
 
 
-
 listOfFiles = findFiles(outputPath)
 
 
@@ -57,7 +56,22 @@ for fileName in listOfFiles:
 
 for b in listOfLinks: 
 	print b[0]
-	print b[1]
+
+
+sortByColumn(listOfLinks,2)
+
+for b in listOfLinks: 
+	print b[0]
+
+
+for post in listOfFiles:
+
+	openFile = readFile(post)
+
+	nextLink = []
+	previousLink = []
+
+	#print "OPen file", openFile
 
 
 
@@ -83,6 +97,5 @@ def saveLinks():
 	target.close()
 
 
-saveLinks()
 
 
