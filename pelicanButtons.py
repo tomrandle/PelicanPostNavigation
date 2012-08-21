@@ -44,17 +44,6 @@ def sortByColumn(A,*args):
     return A
 
 
-"""
-def createLink(outputFile, inputLinks):
-	outPut = open(to_file, 'w')
-
-	root_element = ET.Element("body")
-
-	ul = ET.SubElement(root_element, "BAH")
-
-	print "creating element"
-
-"""
 
 
 listOfFiles = findFiles(outputPath)
@@ -71,6 +60,41 @@ for b in listOfLinks:
 	print b[1]
 
 
+outputTestPath = "/Users/tom/Dropbox/python/pelicanAddNextAndPreviousButtons"
+
+os.chdir(outputTestPath)
+
+target = open("outputText.html", 'w')
+
+
+root_element = ElementTree.Element("nav")
+
+nextLink = ElementTree.SubElement(root_element, "a", Class="bah",href="www.google.com")
+previousLink = ElementTree.SubElement(root_element, "a", Class="sas", href="www.google.com", title="BAAAAAH")
+
+nextLink.text = "Mystical content"
+previousLink.text = "More"
+
+
+target.write(ElementTree.tostring(root_element))
+
+
+
+
+
+
+
+"""
+def createLink(outputFile, inputLinks):
+	outPut = open(to_file, 'w')
+
+	root_element = ET.Element("body")
+
+	ul = ET.SubElement(root_element, "BAH")
+
+	print "creating element"
+
+"""
 
 
 """
