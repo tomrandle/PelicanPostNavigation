@@ -45,35 +45,38 @@ def sortByColumn(A,*args):
 
 
 
+#Open all the files in the folder and read their information 
+
 listOfFiles = findFiles(outputPath)
-
 listOfLinks = []
-
 
 for fileName in listOfFiles:
 	listOfLinks.append(readFile(fileName))
 
+#Sort the list by date
 
 sortByColumn(listOfLinks,2)
 
 
+#Open each file again
 
-for post in listOfLinks:
-	#text = str(post[3]).strip('[]').strip("''") # Must be doing something wrong to need this!?
+for index, post in enumerate(listOfLinks):
 	text = post[3]
 	page = open(text)
+	
+	#Work out which are the previous and next links
+
+	if index > 0 :
+		previousIndex = index - 1
+		previousLink = listOfLinks[previousIndex]
+		print "Previous link", previousLink
+
+	if index < (len(listOfLinks)-1):
+		nextIndex = index + 1
+		nextLink = listOfLinks[nextIndex]
+		print "Next link", nextLink
 
 
-	if post > 0 :
-		index = post - 1 #post is a list!!
-		nextLink = listOfLinks[index][3]
-		print nextLink
-	previousLink = []
-
-	#Lookup 
-
-
-	#print "OPen file", openFile
 
 
 
