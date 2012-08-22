@@ -2,8 +2,6 @@ import glob
 import os
 import operator
 from BeautifulSoup import BeautifulSoup
-from xml.etree import ElementTree
-
 
 outputPath = "/Users/tom/Dropbox/Sites/newtomrandle.com/output/posts"
 locationOfLink = 'h2'
@@ -37,7 +35,7 @@ def readFile(fileName):
 
 	return [pageName, pageURL , pageDate , fileName]
 
-	fileName.close()
+	page.close()
 
 
 
@@ -46,38 +44,20 @@ def sortByColumn(A,*args):
     return A
 
 
-
-def saveTestLinks():
-
-	outputTestPath = "/Users/tom/Dropbox/python/pelicanAddNextAndPreviousButtons/outputText.html"
-
-	target = open(outputTestPath, 'w')
-
-
-	root_element = ElementTree.Element("nav")
-
-
-	nextLink = ElementTree.SubElement(root_element, "a", {'class': 'bah', 'href': 'www.bah.com'})
-	previousLink = ElementTree.SubElement(root_element, "a", Class="sas", href="www.google.com", title="BAAAAAH")
-
-	nextLink.text = "Mystical content"
-	previousLink.text = "More"
-
-
-	target.write(ElementTree.tostring(root_element))
-
-	target.close()
-
-
-
 def createNav(parentElement, openFile):
 
 	print "creating nav"
 	
-	page = open(openFile, 'rt')
+	page = open(openFile, 'r+')
 
-	print page
-	
+	soup = BeautifulSoup(page.read())
+
+	subtree = soup.div
+	print subtree
+
+
+
+	page.close()
 
 
 def createLink(parentElement, className, linkText, linkURL, linkTitle): 
@@ -117,7 +97,6 @@ for index, post in enumerate(listOfLinks):
 	createNav('div',fileToOpen)
 	#Write Links
 
-	saveTestLinks()
 
 
 
