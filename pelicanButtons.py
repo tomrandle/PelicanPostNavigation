@@ -48,18 +48,17 @@ def createNav(parentElement, openFile):
 
 	print "creating nav"
 	
-	page = open(openFile, 'r+')
-
+	page = open(openFile, 'r')
 	soup = BeautifulSoup(page.read())
 
-	subSoup = soup.section
+	page.close()
 
-	tag1 = Tag(soup, "mytag")
-	subSoup.insert(0, tag1)
+	page = open(openFile, 'w')
 
 	
-	print soup
-
+	
+	page.write(soup.prettify())
+	
 	page.close()
 
 
