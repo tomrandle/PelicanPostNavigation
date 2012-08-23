@@ -19,12 +19,19 @@ def findFiles(pathName):
 	return _fileList
 
 
+def createSoup(openFile):
+	
+	page = open(openFile, 'r')
+	soup = BeautifulSoup(page.read())
+	
+	page.close()
+
+	return soup
+
 
 def readFile(fileName):
 
-	page = open(fileName)
-
-	soup = BeautifulSoup(page.read())
+	soup = createSoup(fileName)
 
 	titleSection = soup.find(locationOfLink)
 	dateSection = soup.find('abbr', { "class" : locationOfDate })
@@ -35,37 +42,35 @@ def readFile(fileName):
 
 	return [pageName, pageURL , pageDate , fileName]
 
-	page.close()
-
-
 
 def sortByColumn(A,*args):
     A.sort(key=operator.itemgetter(*args))
     return A
 
 
-def createNav(parentElement, openFile):
 
-	print "creating nav"
+
+
+def modifyLink(elementClass, fileName, link):
+
+	linkName =  link[0]
+	linkURL =  link[1]
+
+	soup = createSoup(fileName)
+
+	page = open(fileName, 'w')
+
+
+	nextTag = soup.find('a', { "class" : elementClass})
 	
-	page = open(openFile, 'r')
-	soup = BeautifulSoup(page.read())
+	nextTag["href"] = linkURL
+	nextTag["title"] = linkName
+	nextTag.insert(0, linkName)	
 
-	page.close()
-
-	page = open(openFile, 'w')
-
-	nextTag = soup.find('a', { "class" : "next-page"})
-	nextTag["href"] = "www.bbc.co.uk"
-	nextTag.insert(0, "Hooray!")	
 	page.write(soup.prettify())
-	
 	page.close()
 
 
-def createLink(parentElement, className, linkText, linkURL, linkTitle): 
-
-	print "creating link"
 
 
 
@@ -92,13 +97,15 @@ for index, post in enumerate(listOfLinks):
 	if index > 0 :
 		previousIndex = index - 1
 		previousLink = listOfLinks[previousIndex]
+		modifyLink("previous-page", fileToOpen, previousLink)
+
 
 	if index < (len(listOfLinks)-1):
 		nextIndex = index + 1
 		nextLink = listOfLinks[nextIndex]
+		modifyLink("next-page", fileToOpen, nextLink)
 
-	createNav('div',fileToOpen)
-	#Write Links
+
 
 
 
