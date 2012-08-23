@@ -55,8 +55,9 @@ def createNav(parentElement, openFile):
 
 	page = open(openFile, 'w')
 
-	
-	
+	nextTag = soup.find('a', { "class" : "next-page"})
+	nextTag["href"] = "www.bbc.co.uk"
+	nextTag.insert(0, "Hooray!")	
 	page.write(soup.prettify())
 	
 	page.close()
