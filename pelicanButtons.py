@@ -48,9 +48,6 @@ def sortByColumn(A,*args):
     return A
 
 
-
-
-
 def modifyLink(elementClass, fileName, link):
 
 	linkName =  link[0]
@@ -69,9 +66,6 @@ def modifyLink(elementClass, fileName, link):
 
 	page.write(soup.prettify())
 	page.close()
-
-
-
 
 
 #Open all the files in the folder and read their information 
