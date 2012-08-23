@@ -1,7 +1,7 @@
 import glob
 import os
 import operator
-from BeautifulSoup import BeautifulSoup
+from BeautifulSoup import BeautifulSoup, Tag, NavigableString
 
 outputPath = "/Users/tom/Dropbox/Sites/newtomrandle.com/output/posts"
 locationOfLink = 'h2'
@@ -52,10 +52,13 @@ def createNav(parentElement, openFile):
 
 	soup = BeautifulSoup(page.read())
 
-	subtree = soup.div
-	print subtree
+	subSoup = soup.section
 
+	tag1 = Tag(soup, "mytag")
+	subSoup.insert(0, tag1)
 
+	
+	print soup
 
 	page.close()
 
